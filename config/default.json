@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://deepakshajan:mongodb@cluster0.higfm.mongodb.net/goe?retryWrites=true&w=majority"
+  }
