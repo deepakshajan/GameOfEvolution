@@ -1,12 +1,13 @@
 const express = require('express');
 let cors = require('cors');
 const apis = require('./routes/api/apis');
-const connectDB = require('./config/db');
 const GOESocket  = require('./config/GoeSocket');
+const GoeDatabase = require('./config/GoeDatabase');
+const Simulation = require('./engine/main/Simulation');
 
 const app = express();
 
-// connectDB();
+// GoeDatabase.connectDB(); //Uncoment to enable DB
 
 app.use(cors({ origin: true, credentials: true }));
 
@@ -19,3 +20,4 @@ const port = process.env.PORT || 8082;
 
 const server = app.listen(port, () => console.log(`Server running on port ${port}`));
 GOESocket.initializeSocket(server);
+Simulation.start();

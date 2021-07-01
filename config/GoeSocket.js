@@ -1,15 +1,18 @@
-const SocketEngine = require("../engine/SocketEngine");
+const SocketEngine = require("../engine/socket/SocketEngine");
+const GoeConfig = require("./GoeConfig");
 
 class GOESocket {
 
-    static initializeSocket(server) {
+    static initializeSocket (server) {
         const io = require("socket.io")(server);
         io.on('connection', function(socket) {
             console.log('GOELog: Socket connection established with id : ', socket.id);
             socket.on('dataFromClient', function() {
                 console.log('GOELog: Data from client recieved');
             });
-            SocketEngine.pushDataToClient(socket);
+            if(GoeConfig.canPingClient) {
+                SocketEngine.pushDataToClient(socket);
+            }
         });
         console.log('GOELog: Socket ready for connection');
     }
