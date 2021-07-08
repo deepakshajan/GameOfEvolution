@@ -1,5 +1,5 @@
 import { FixedSizeGrid as Grid, areEqual } from 'react-window';
-import React, { Fragment, memo, useCallback, useState } from "react";
+import React, { Fragment, memo } from "react";
 const { PureComponent } = require("react");
 
 class Canvas extends PureComponent {

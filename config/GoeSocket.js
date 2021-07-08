@@ -10,9 +10,7 @@ class GOESocket {
             socket.on('dataFromClient', function() {
                 console.log('GOELog: Data from client recieved');
             });
-            if(GoeConfig.canPingClient) {
-                SocketEngine.pushDataToClient(socket);
-            }
+            SocketEngine.pushDataToClient(socket);
         });
         console.log('GOELog: Socket ready for connection');
     }

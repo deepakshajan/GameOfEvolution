@@ -1,7 +1,7 @@
 import axios from 'axios';
 import LandingPageModelFE from '../models/LandingPageModelFE';
 import Canvas from './Canvas';
-import Stats from './Stats';
+import ActionBar from './ActionBar';
 const { Component } = require("react");
 const io = require('socket.io-client');
 
@@ -16,7 +16,7 @@ class LandingPage extends Component {
   render() {
     return (this.state.canRender===true &&
       <div className="landing-page-container">
-        <Stats step={this.state.data.canvasRefreshData.step} />
+        <ActionBar step={this.state.data.canvasRefreshData.step} />
         <Canvas refreshData={this.state.data.canvasRefreshData} canvasUI={this.state.data.canvasUI} canvasData={this.state.data.canvasData} />
       </div>
     );

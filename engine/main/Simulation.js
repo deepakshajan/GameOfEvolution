@@ -1,14 +1,16 @@
 const GoeConfig = require("../../config/GoeConfig");
 const DataCache = require("../data/DataCache");
+const ComputeNextStepData = require("./ComputeNextStepData");
 
 class Simulation {
 
     static start() {
             setInterval(()=>{
-                let dataTemp = DataCache.getData();
-                dataTemp.canvasRefreshData.step+=1;
-                DataCache.setData(dataTemp);
-            },GoeConfig.simulationStepIntervalMs);     
+                if(GoeConfig.canRunSimulation) {
+                    let nextData = ComputeNextStepData.compute(DataCache.getData());
+                    DataCache.setData(nextData);
+                }
+            }, GoeConfig.simulationStepIntervalMs);     
     }
 }
 

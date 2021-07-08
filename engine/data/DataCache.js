@@ -20,6 +20,10 @@ class DataCache {
         DataCache.instance.data = data;
     }
 
+    resetData() {
+        DataCache.instance.data = new LandingPageModelBE();
+    }
+
 }
 
 module.exports = new DataCache();

@@ -2,7 +2,7 @@
   max-width: 100%;
 }
 
-.stats-section {
+.action-bar {
   max-height: 5vh;
   max-width: 100%;
   outline: 2px  solid grey;
@@ -11,8 +11,30 @@
   font-weight: bold;
 }
 
-.stats-section-info {
+.action-bar-stepCount {
   margin-left: 10px;
+}
+
+.action-bar-buttonsDiv {
+  display: inline-block;
+  float: right;
+  margin-right: 20px;
+}
+
+.action-bar-buttonsDiv .action-button{
+  display: inline-block;
+}
+
+.action-bar-buttonsDiv .action-button-start{
+  color: green;
+}
+
+.action-bar-buttonsDiv .action-button-stop{
+  color: red;
+}
+
+.action-bar-buttonsDiv .action-button-pauseResume{
+  color: blue;
 }
 
 .canvas-container {
