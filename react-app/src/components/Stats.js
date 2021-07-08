@@ -6,7 +6,7 @@ class Stats extends Component {
     render() {
         return (
             <div className="stats-section">
-                <span className="stats-section-info">Cycle # {this.props.messageSeq}</span>
+                <span className="stats-section-info">Step # {this.props.step}</span>
             </div>
         );
 

@@ -1,4 +1,4 @@
-const DataCache = require("../../data/DataCache");
+const DataCache = require("../data/DataCache");
 
 class LoadDataProvider {
 

@@ -16,27 +16,11 @@
 }
 
 .canvas-container {
-  white-space: nowrap;
-  max-width: 100%;
-  height: 95vh;
-  overflow: scroll;
-  line-height: 1px;
-  background-color: darkgray;
-  text-align: center;
+  margin: 2px;
 }
 
 .canvas-cell {
-  display: inline-block;
-  position: relative;
   outline: 1px solid gray;
   margin: 2px 2px 2px 2px;
 }
 
-.canvas-cell::after {
-  /* content: '\200b'; */
-}
-
-.canvas-cell.canvas-cell-rowend::after {
-  content: "\a";
-  white-space: pre;
-}

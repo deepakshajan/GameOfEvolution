@@ -1,6 +1,6 @@
 class CanvasRefreshDataModelFE {
 
-    messageSeq;
+    step;
     cellData;
     cellColor;
 

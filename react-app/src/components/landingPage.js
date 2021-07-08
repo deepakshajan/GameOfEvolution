@@ -10,27 +10,33 @@ class LandingPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = new LandingPageModelFE();
+    this.state = {data:new LandingPageModelFE(),canRender:false};
   }
 
   render() {
-    return (
+    return (this.state.canRender===true &&
       <div className="landing-page-container">
-        <Stats messageSeq={this.state.canvasRefreshData.messageSeq} />
-        <Canvas refreshData={this.state.canvasRefreshData} canvasUI={this.state.canvasUI} canvasData={this.state.canvasData} />
+        <Stats step={this.state.data.canvasRefreshData.step} />
+        <Canvas refreshData={this.state.data.canvasRefreshData} canvasUI={this.state.data.canvasUI} canvasData={this.state.data.canvasData} />
       </div>
     );
   }
 
   componentDidMount() {
-    axios.get ('http://localhost:8082/load/dataForLoad').then(res => {
-      this.setState(res.data);
-    }).catch(err => {
-      console.log('GOELog: Error loading data for landing page initial load');
-    })
+    this.getInitialDataForLoad();
     this.initializeSocketClient();
   }
 
+  getInitialDataForLoad() {
+    axios.get ('http://localhost:8082/load/dataForLoad').then(res => {
+      let newState = { ...this.state };
+      newState.data = res.data;
+      newState.canRender = true;
+      this.setState(newState);
+    }).catch(err => {
+      console.log('GOELog: Error loading data for landing page initial load');
+    });
+  }
 
   initializeSocketClient() {
     const socket = io("http://localhost:8082", { transports: ['websocket'] });
@@ -42,9 +48,9 @@ class LandingPage extends Component {
     });
   }
 
-  syncClientSideDataWithServer(data) {
+  syncClientSideDataWithServer(refreshDataFromServer) {
     let newState = { ...this.state };
-    newState.canvasRefreshData = data;
+    newState.data.canvasRefreshData = refreshDataFromServer;
     this.setState(newState);
   }
 

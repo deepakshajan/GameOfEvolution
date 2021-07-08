@@ -6,7 +6,7 @@ class Simulation {
     static start() {
             setInterval(()=>{
                 let dataTemp = DataCache.getData();
-                dataTemp.canvasRefreshData.messageSeq++;
+                dataTemp.canvasRefreshData.step+=1;
                 DataCache.setData(dataTemp);
             },GoeConfig.simulationStepIntervalMs);     
     }

@@ -1,48 +1,50 @@
-const { Component } = require("react");
-const { default: Cell } = require("./Cell");
+import { FixedSizeGrid as Grid, areEqual } from 'react-window';
+import React, { Fragment, memo, useCallback, useState } from "react";
+const { PureComponent } = require("react");
 
-class Canvas extends Component {
+class Canvas extends PureComponent {
 
     cells =[];
+    cell = memo(({ data, columnIndex, rowIndex, style }) => (
+        <div style={{...style,backgroundColor: data[rowIndex][columnIndex].cellColor}} className="canvas-cell"></div>
+    ),areEqual);
+    viewPortSize = this.getViewportSize();
+
+
+    constructor(props) {
+        super(props);
+        this.itemsAray = props.refreshData.cellData;
+    }
 
     render() {
-        this.cells = this.createCells(); 
         return (
-            <div className="canvas-container">
-                <div className="canvas-inner-container">
-                    {this.cells}
+            <Fragment>
+                <div className="canvas-container">
+                    <div className="canvas-inner-container">
+                        <Grid
+                            itemData = {this.props.refreshData.cellData}
+                            columnCount={this.props.canvasUI.noCellsHorizontal}
+                            columnWidth={this.props.canvasUI.cellSizePx}
+                            rowCount={this.props.canvasUI.noCellsVertical}
+                            rowHeight={this.props.canvasUI.cellSizePx}
+                            height={this.viewPortSize.height-30}
+                            width={this.viewPortSize.width-5}>
+                            {this.cell}
+                        </Grid>
+                    </div>
                 </div>
-            </div>
+            </Fragment>
         );
     }
 
-    createCells() {
-        let cellsTemp = [];
-        let cellIndex = 0;
-        let breakKey = 0;
-        const noHorizontal = this.props.canvasUI.noCellsHorizontal;
-        const noVertical = this.props.canvasUI.noCellsVertical;
-        const cellSize = this.props.canvasUI.cellSizePx;
-        const cellData = this.props.refreshData.cellData;
-        const noVerticalLastIndex = noVertical-1;
-        let cellStyle;
-        for(let i=0;i<noHorizontal;i++) {
-            for(let j=0;j<noVertical;j++) {
-                cellStyle = {
-                    minWidth: cellSize,
-                    minHeight: cellSize,
-                    backgroundColor: cellData[cellIndex].cellColor
-                };
-                cellsTemp.push(<Cell key={cellData[cellIndex].cellKey} cellStyle={cellStyle}
-                    className={"canvas-cell "+cellData[cellIndex].cellKey} />);
-                    if(j===noVerticalLastIndex) {
-                        cellsTemp.push(<br key={"br_"+breakKey}></br>);
-                        breakKey++;
-                    }
-                    cellIndex++;
-            }
+    getViewportSize(){
+        var e = window;
+        var a = 'inner';
+        if (!('innerWidth' in window)){
+            a = 'client';
+            e = document.documentElement || document.body;
         }
-        return cellsTemp;
+        return { width : e[ a+'Width' ] , height : e[ a+'Height' ] }
     }
 
 }

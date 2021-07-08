@@ -5,11 +5,10 @@ const SocketDataProvider = require("./SocketDataProvider");
 class SocketEngine {
 
     static pushDataToClient(socket) {
-        let messageSeq = 0;
         setInterval(() => {
-            const dataToClient = SocketDataProvider.getDataForLandingPageRefresh(++messageSeq);
+            const dataToClient = SocketDataProvider.getDataForLandingPageRefresh();
             socket.emit('dataFromServer', dataToClient);
-            console.log("GOELog:Data sent to client -> messageSeq : ", dataToClient.messageSeq);
+            console.log("GOELog: Data sent to client -> step : ", dataToClient.step);
         }, GoeConfig.socketPingIntervalMs);
     }
 }

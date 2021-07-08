@@ -1,6 +1,6 @@
 
 const express = require('express');
-const LoadDataProvider = require('../../engine/main/load/LoadDataProvider');
+const LoadDataProvider = require('../../engine/load/LoadDataProvider');
 const SocketDataProvider = require('../../engine/socket/SocketDataProvider');
 const router = express.Router();
 

@@ -2,11 +2,13 @@ const GoeConfig = require("../../config/GoeConfig");
 
 class CellDataModelBE {
 
-    cellKey = 0;
+    cellRowKey = 0;
+    cellColumnKey = 0;
     cellColor = GoeConfig.cellColorDefault;
 
-    constructor(key) {
-        this.cellKey = key;
+    constructor(rowKey, columnKey) {
+        this.cellRowKey = rowKey;
+        this.cellColumnKey = columnKey;
     }
 
 }

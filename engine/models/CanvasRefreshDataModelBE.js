@@ -3,13 +3,16 @@ const CellDataModelBE = require("./CellDataModelBE");
 
 class CanvasRefreshDataModelBE {
 
-    messageSeq = 0;
+    step = 0;
     cellData = [];
 
     constructor() {
-        const lastIndexOfCell = (GoeConfig.noCellsHorizontal * GoeConfig.noCellsVertical) - 1;
-        for(let i=0;i<=lastIndexOfCell;i++) {
-            this.cellData.push(new CellDataModelBE("cell_"+i));
+        for(let i=0;i<GoeConfig.noCellsVertical;i++) {
+            let cellRow = [];
+            for(let j=0;j<GoeConfig.noCellsHorizontal;j++) {
+                cellRow.push(new CellDataModelBE(i,j));
+            }
+            this.cellData.push(cellRow);
         }
     }
 }

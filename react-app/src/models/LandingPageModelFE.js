@@ -4,7 +4,6 @@ const { default: CanvasUIModelFE } = require("./CanvasUIModelFE");
 
 class LandingPageModelFE {
 
-    messageSeq = 0;
     canvasUI = new CanvasUIModelFE();
     canvasData = new CanvasDataModelFE();
     canvasRefreshData = new CanvasRefreshDataModelFE();
