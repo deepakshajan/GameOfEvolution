@@ -3,22 +3,20 @@ const GoeConfig = require("../../config/GoeConfig");
 
 class CellDataModelBE {
 
-    cellRowKey = 0;
-    cellColumnKey = 0;
-    isAlive = false;
+    rowKey = 0;
+    colKey = 0;
     cellColor = GoeConfig.cellColorDefault;
 
     constructor(rowKey, columnKey) {
-        this.cellRowKey = rowKey;
-        this.cellColumnKey = columnKey;
+        this.rowKey = rowKey;
+        this.colKey = columnKey;
     }
 
-    setIsAlive(boolValue) {
-        this.isAlive = boolValue;
+    get cellColor() {
+        return this.cellColor;
     }
-
-    setCellColor(stringValue) {
-        this.cellColor = stringValue;
+    set cellColor(value) {
+        this.cellColor = value;
     }
 
 }

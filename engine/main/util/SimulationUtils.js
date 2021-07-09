@@ -1,14 +1,18 @@
 
 class SimulationUtils {
 
-    static getItemFromArrayIndex(array, rowIndex, colIndex) {
-      return array[rowIndex][colIndex];     
+    static getFullCellData(data, rowIndex, colIndex) {
+      return data.canvasData.fullCellData[rowIndex][colIndex];
+    }
+
+    static getRefreshCellData(data, rowIndex, colIndex) {
+      return data.canvasRefreshData.cellData[rowIndex][colIndex];
     }
 
     static getBooleanFromProbablity(probablity) {
         const highValue = 1/probablity;
-        const randomNumber = Math.floor(Math.random() * highValue);
-        return randomNumber === Math.floor(highValue/2);
+        const randomNumber = Math.ceil(Math.random() * highValue);
+        return randomNumber === Math.ceil(highValue/2);
     }
 }
 

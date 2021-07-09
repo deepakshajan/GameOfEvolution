@@ -3,6 +3,7 @@
 }
 
 .action-bar {
+  position: relative;
   max-height: 5vh;
   max-width: 100%;
   outline: 2px  solid grey;
@@ -16,25 +17,40 @@
 }
 
 .action-bar-buttonsDiv {
-  display: inline-block;
   float: right;
   margin-right: 20px;
 }
 
-.action-bar-buttonsDiv .action-button{
+.action-bar-buttonsDiv .action-button {
   display: inline-block;
 }
 
-.action-bar-buttonsDiv .action-button-start{
+.action-bar-buttonsDiv .action-button-start {
   color: green;
 }
 
-.action-bar-buttonsDiv .action-button-stop{
+.action-bar-buttonsDiv .action-button-stop {
   color: red;
 }
 
-.action-bar-buttonsDiv .action-button-pauseResume{
+.action-bar-buttonsDiv .action-button-pauseResume {
   color: blue;
+}
+
+.action-button-stats {
+  margin-left: 30px;
+}
+
+.action-bar .stats-popup {
+  z-index: 10;
+  position: absolute;
+  min-width: 250px;
+  min-height: 250px;
+  top: 25px;
+  left: 20px;
+  color: white;
+  border-style: double;
+  background-color: grey;
 }
 
 .canvas-container {

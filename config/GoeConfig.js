@@ -1,11 +1,11 @@
 class GoeConfig {
 
     
-    _socketPingIntervalMs = 100;
-    _simulationStepIntervalMs = 10;
+    _socketPingIntervalMs = 500;
+    _simulationStepIntervalMs = 100;
     
-    _noCellsHorizontal = 50;
-    _noCellsVertical = 50;
+    _noCellsHorizontal = 100;
+    _noCellsVertical = 100;
     _cellSizePx = 15;
     _cellColorDefault = "white";
     

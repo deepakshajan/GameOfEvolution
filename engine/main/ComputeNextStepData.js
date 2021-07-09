@@ -17,10 +17,12 @@ class ComputeNextStepData {
     }
 
     static computeFormationOfFirstCell(data, rowIndex, colIndex) {
-        let cell = SimulationUtils.getItemFromArrayIndex(data.canvasRefreshData.cellData,rowIndex,colIndex);
-        if(SimulationUtils.getBooleanFromProbablity(GoeConfig.probInitialLife) && !cell.isAlive) {
-            cell.setIsAlive(true);
-            cell.setCellColor("black");;
+        let fullCell = SimulationUtils.getFullCellData(data, rowIndex, colIndex);
+        let refreshCell = SimulationUtils.getRefreshCellData(data, rowIndex, colIndex);
+        if(SimulationUtils.getBooleanFromProbablity(GoeConfig.probInitialLife) && !fullCell.isAlive) {
+          fullCell.isAlive = true;
+          data.canvasData.totalAliveCount++;
+          refreshCell.cellColor = "black";
         }
     }
 
