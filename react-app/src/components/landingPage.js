@@ -16,7 +16,7 @@ class LandingPage extends Component {
   render() {
     return (this.state.canRender===true &&
       <div className="landing-page-container">
-        <ActionBar step={this.state.data.canvasRefreshData.step} />
+        <ActionBar step={this.state.data.canvasRefreshData.step} statsData={this.state.data.canvasRefreshData.statsData} />
         <Canvas refreshData={this.state.data.canvasRefreshData} canvasUI={this.state.data.canvasUI} canvasData={this.state.data.canvasData} />
       </div>
     );

@@ -9,7 +9,7 @@ class SocketEngine {
             if(GoeConfig.canPingClient) {
                 const dataToClient = SocketDataProvider.getDataForLandingPageRefresh();
                 socket.emit('dataFromServer', dataToClient);
-                console.log("GOELog: Data sent to client -> step : ", dataToClient.step);
+                // console.log("GOELog: Data sent to client -> step : ", dataToClient.step);
             }    
         }, GoeConfig.socketPingIntervalMs);
     }

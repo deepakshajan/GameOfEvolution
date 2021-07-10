@@ -2,7 +2,7 @@ class CanvasRefreshDataModelFE {
 
     step;
     cellData;
-    cellColor;
+    statsData;
 
 }
 

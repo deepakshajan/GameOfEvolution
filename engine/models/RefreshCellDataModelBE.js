@@ -1,7 +1,7 @@
 const GoeConfig = require("../../config/GoeConfig");
 
 
-class CellDataModelBE {
+class RefreshCellDataModelBE {
 
     rowKey = 0;
     colKey = 0;
@@ -21,4 +21,4 @@ class CellDataModelBE {
 
 }
 
-module.exports = CellDataModelBE;
+module.exports = RefreshCellDataModelBE;

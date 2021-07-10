@@ -1,16 +1,17 @@
 class GoeConfig {
 
     
-    _socketPingIntervalMs = 500;
-    _simulationStepIntervalMs = 100;
+    _socketPingIntervalMs = 1000;
+    _simulationStepIntervalMs = 50;
     
     _noCellsHorizontal = 100;
     _noCellsVertical = 100;
     _cellSizePx = 15;
     _cellColorDefault = "white";
     
+    _probInitialLife = 1/1_000;
 
-    _probInitialLife = (1 /1_00_000);
+    _geneLifeSpanMaxValue = 30;
 
     _canRunSimulation = false;
     _canPingClient = false;
@@ -91,6 +92,12 @@ class GoeConfig {
     }
     set canRunSimulation(value) {
      GoeConfig.instance._canRunSimulation = value;
+    }
+    get geneLifeSpanMaxValue() {
+        return this._geneLifeSpanMaxValue;
+    }
+    set geneLifeSpanMaxValue(value) {
+        this._geneLifeSpanMaxValue = value;
     }
 
 

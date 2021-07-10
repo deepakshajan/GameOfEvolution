@@ -53,6 +53,11 @@
   background-color: grey;
 }
 
+.action-bar .stats-popup .stats-popup-row {
+  display: block;
+  margin-left: 10px;
+}
+
 .canvas-container {
   margin: 2px;
 }

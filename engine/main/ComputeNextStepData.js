@@ -4,11 +4,13 @@ const SimulationUtils = require("./util/SimulationUtils");
 class ComputeNextStepData {
 
     static compute(currentData) {
-        let nextData = currentData;
+        let nextData = {...currentData};
 
         for(let i=0; i<GoeConfig.noCellsVertical;i++) {
           for(let j=0;j<GoeConfig.noCellsHorizontal;j++) {
-            this.computeFormationOfFirstCell(nextData,i,j);
+            let fullCell = SimulationUtils.getFullCellData(nextData, i, j);
+            let refreshCell = SimulationUtils.getRefreshCellData(nextData, i, j);
+            fullCell.isAlive? this.computeNextActionForAliveCells(nextData,fullCell,refreshCell) : this.computeFormationOfFirstCell(nextData,fullCell,refreshCell);
           }  
         }
         
@@ -16,14 +18,24 @@ class ComputeNextStepData {
         return nextData;
     }
 
-    static computeFormationOfFirstCell(data, rowIndex, colIndex) {
-        let fullCell = SimulationUtils.getFullCellData(data, rowIndex, colIndex);
-        let refreshCell = SimulationUtils.getRefreshCellData(data, rowIndex, colIndex);
-        if(SimulationUtils.getBooleanFromProbablity(GoeConfig.probInitialLife) && !fullCell.isAlive) {
-          fullCell.isAlive = true;
-          data.canvasData.totalAliveCount++;
-          refreshCell.cellColor = "black";
-        }
+    static computeFormationOfFirstCell(data, fullCell, refreshCell) {
+      if(SimulationUtils.getBooleanFromProbablity(GoeConfig.probInitialLife)) {
+        fullCell.isAlive = true;
+        fullCell.geneData.lifeSpan = SimulationUtils.getRandomLimitedPercentageValue(GoeConfig.geneLifeSpanMaxValue);
+        data.canvasRefreshData.statsData.currentAliveCount++;
+        data.canvasRefreshData.statsData.totalAliveCount++;
+        refreshCell.cellColor = "black";
+      }
+    }
+
+    static computeNextActionForAliveCells(data, fullCell, refreshCell) {
+      if(SimulationUtils.getBooleanFromInverseProbablity(fullCell.geneData.lifeSpan)) { 
+        fullCell.isAlive = false;
+        data.canvasRefreshData.statsData.currentAliveCount--;
+        data.canvasRefreshData.statsData.totalDeadCount++;
+        refreshCell.cellColor = GoeConfig.cellColorDefault;
+      }
+      
     }
 
 }

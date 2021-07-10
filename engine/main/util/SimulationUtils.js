@@ -1,3 +1,4 @@
+const GoeConfig = require("../../../config/GoeConfig");
 
 class SimulationUtils {
 
@@ -9,10 +10,20 @@ class SimulationUtils {
       return data.canvasRefreshData.cellData[rowIndex][colIndex];
     }
 
-    static getBooleanFromProbablity(probablity) {
-        const highValue = 1/probablity;
-        const randomNumber = Math.ceil(Math.random() * highValue);
-        return randomNumber === Math.ceil(highValue/2);
+    static getBooleanFromProbablity(probablityInPercentage) {
+        return this.getRandomPercentageValue() <= probablityInPercentage;
+    }
+
+    static getBooleanFromInverseProbablity(probablityInPercentage) {
+      return this.getRandomPercentageValue() <= 100-probablityInPercentage;
+  }
+
+    static getRandomPercentageValue() {
+      return Math.random() * 100;
+    }
+
+    static getRandomLimitedPercentageValue(limit) {
+      return Math.random() * limit;
     }
 }
 

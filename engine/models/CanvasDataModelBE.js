@@ -5,8 +5,6 @@ class CanvasDataModelBE {
 
     fullCellData = [];
 
-    totalAliveCount = 0;
-
     constructor() {
         for(let i=0;i<GoeConfig.noCellsVertical;i++) {
             let cellRow = [];
@@ -15,13 +13,6 @@ class CanvasDataModelBE {
             }
             this.fullCellData.push(cellRow);
         }
-    }
-
-    get totalAliveCount() {
-        return this.totalAliveCount;
-    }
-    set totalAliveCount(value) {
-        this.totalAliveCount = value;
     }
 
 }

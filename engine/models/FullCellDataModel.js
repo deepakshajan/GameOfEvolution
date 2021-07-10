@@ -1,14 +1,17 @@
+const GeneDataModelBE = require("./GeneDataModelBE");
+
 class FullCellDataModel {
     
-    rowKey;
-    colKey;
+    _rowKey;
+    _colKey;
 
     _isAlive = false;
-
+    
+    _geneData = new GeneDataModelBE();
 
     constructor(rowIndex, colIndex) {
-        this.rowKey = rowIndex;
-        this.colKey = colIndex;
+        this._rowKey = rowIndex;
+        this._colKey = colIndex;
     }
 
     get isAlive() {
@@ -16,6 +19,12 @@ class FullCellDataModel {
     }
     set isAlive(value) {
         this._isAlive = value;
+    }
+    get geneData() {
+        return this._geneData;
+    }
+    set geneData(value) {
+        this._geneData = value;
     }
 
 }

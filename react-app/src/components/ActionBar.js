@@ -16,7 +16,8 @@ class ActionBar extends Component {
             <div className="action-bar">
                 <span className="action-bar-stepCount">Step # {this.props.step}</span>
                 <button onMouseEnter={this.showStatspopup.bind(this)} onMouseLeave={this.hideStatsPopup.bind(this)} className="action-button-stats">Stats</button>
-                {this.state.statsCardDisplayed ? <StatsCard totalAliveCount={this.state.statsData.totalAliveCount}></StatsCard> : null}
+                {this.state.statsCardDisplayed ? <StatsCard totalAliveCount={this.props.statsData.totalAliveCount} totalDeadCount={this.props.statsData.totalDeadCount}
+                    currentAliveCount={this.props.statsData.currentAliveCount} evolutionCycleCount={this.props.statsData.evolutionCycleCount} ></StatsCard> : null}
                 <div className="action-bar-buttonsDiv">
                     {this.state.startDisplayed ? <button onClick={this.startSimulation.bind(this)} className="action-button action-button-start">Start</button> : null}
                     {!this.state.startDisplayed && !this.state.resumeDisplayed ? <button onClick={this.pauseSimulation.bind(this)} className="action-button action-button-pauseResume">Pause</button> : null}
@@ -57,15 +58,11 @@ class ActionBar extends Component {
     }
 
     showStatspopup() {
-        axios.get ('http://localhost:8082/loadStatsData').then(res => {
-            let newState = { ...this.state };
-            newState.statsData = res.data;
-            newState.statsCardDisplayed = true;
-            this.setState(newState);
-          }).catch(err => {
-            console.log('GOELog: Error loading stats data for stats popup display');
-          });
+        let newState = { ...this.state };
+        newState.statsCardDisplayed = true;
+        this.setState(newState);
     }
+
 
     hideStatsPopup() {
         let newState = {...this.state};
