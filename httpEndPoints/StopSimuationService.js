@@ -1,11 +1,11 @@
-const GoeConfig = require("../config/GoeConfig");
+const ConfigCache = require("../config/ConfigCache");
 const DataCache = require("../engine/data/DataCache");
 
 class StopSimulationService {
 
     static stop() {
-        GoeConfig.canRunSimulation = false;
-        GoeConfig.canPingClient = false;
+        ConfigCache.getConfig().canRunSimulation = false;
+        ConfigCache.getConfig().canPingClient = false;
         DataCache.resetData();
     }
 }

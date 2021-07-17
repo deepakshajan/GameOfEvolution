@@ -1,12 +1,16 @@
-const GoeConfig = require("../config/GoeConfig");
+
+const ConfigCache = require("../config/ConfigCache");
 const DataCache = require("../engine/data/DataCache");
+const SimulationWorker = require("../engine/main/SimulationWorker");
 
 class StartSimulationService {
 
     static start() {
         DataCache.resetData();
-        GoeConfig.canRunSimulation= true;
-        GoeConfig.canPingClient = true;
+        ConfigCache.getConfig().canRunSimulation= true;
+        ConfigCache.getConfig().canPingClient = true;
+        SimulationWorker.start();
+        SimulationWorker.worker.postMessage({config: ConfigCache.getConfig()});
     }
 }
 

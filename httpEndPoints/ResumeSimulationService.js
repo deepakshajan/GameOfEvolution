@@ -1,10 +1,11 @@
-const GoeConfig = require("../config/GoeConfig");
+const ConfigCache = require("../config/ConfigCache");
+
 
 class ResumeSimulationService {
      
     static resume() {
-        GoeConfig.canRunSimulation = true;
-        GoeConfig.canPingClient = true;
+        ConfigCache.getConfig().canRunSimulation = true;
+        ConfigCache.getConfig().canPingClient = true;
     }
 }
 

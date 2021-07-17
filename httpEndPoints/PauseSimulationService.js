@@ -1,10 +1,10 @@
-const GoeConfig = require("../config/GoeConfig");
+const ConfigCache = require("../config/ConfigCache");
 
 class PauseSimulationService {
 
     static pause() {
-        GoeConfig.canRunSimulation = false;
-        GoeConfig.canPingClient = false;
+        ConfigCache.getConfig().canRunSimulation = false;
+        ConfigCache.getConfig().canPingClient = false;
     }
 }
 

@@ -5,6 +5,15 @@ class StatsDataModelBE {
     currentAliveCount = 0;
     evolutionCycleCount = 0;
 
+    clone() {
+        let clone = new StatsDataModelBE();
+        clone.totalAliveCount = this.totalAliveCount;
+        clone.totalDeadCount = this.totalDeadCount;
+        clone.currentAliveCount = this.currentAliveCount;
+        clone.evolutionCycleCount = this.evolutionCycleCount;
+        return clone;
+    }
+
     get totalAliveCount() {
         return this.totalAliveCount;
     }

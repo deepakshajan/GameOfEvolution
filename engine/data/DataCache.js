@@ -2,28 +2,23 @@ const LandingPageModelBE = require("../models/LandingPageModelBE");
 
 class DataCache {
 
-    data = new LandingPageModelBE();
+    static data;
 
-    constructor() {
-        if(!DataCache.instance) {
-            DataCache.instance = this;
+    static getData() {
+        if(!DataCache.data) {
+            DataCache.data = new LandingPageModelBE();
         }
-        return DataCache.instance;
-    }
-
-
-    getData() {
-        return DataCache.instance.data;
+        return DataCache.data;
     }
     
-    setData(data) {
-        DataCache.instance.data = data;
+    static setData(data) {
+        DataCache.data = data;
     }
 
-    resetData() {
-        DataCache.instance.data = new LandingPageModelBE();
+    static resetData() {
+        DataCache.data = new LandingPageModelBE();
     }
 
 }
 
-module.exports = new DataCache();
+module.exports = DataCache;

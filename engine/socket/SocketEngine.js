@@ -1,4 +1,4 @@
-const GoeConfig = require("../../config/GoeConfig");
+const ConfigCache = require("../../config/ConfigCache");
 const SocketDataProvider = require("./SocketDataProvider");
 
 
@@ -6,12 +6,12 @@ class SocketEngine {
 
     static pushDataToClient(socket) {
         setInterval(() => {  
-            if(GoeConfig.canPingClient) {
+            if(ConfigCache.getConfig().canPingClient) {
                 const dataToClient = SocketDataProvider.getDataForLandingPageRefresh();
                 socket.emit('dataFromServer', dataToClient);
-                // console.log("GOELog: Data sent to client -> step : ", dataToClient.step);
+                console.log("GOELog: Data sent to client -> step : ", dataToClient.step);
             }    
-        }, GoeConfig.socketPingIntervalMs);
+        }, ConfigCache.getConfig().socketPingIntervalMs);
     }
 }
 

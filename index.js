@@ -3,7 +3,6 @@ let cors = require('cors');
 const apis = require('./routes/api/apis');
 const GOESocket  = require('./config/GoeSocket');
 const GoeDatabase = require('./config/GoeDatabase');
-const Simulation = require('./engine/main/Simulation');
 const LoadDataProvider = require('./engine/load/LoadDataProvider');
 
 const app = express();
@@ -23,4 +22,3 @@ const server = app.listen(port, () => console.log(`Server running on port ${port
 GOESocket.initializeSocket(server);
 LoadDataProvider.getDataForLoad();
 console.log("GOELog: Completed data object creation.");
-Simulation.start();

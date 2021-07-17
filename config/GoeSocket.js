@@ -1,5 +1,4 @@
 const SocketEngine = require("../engine/socket/SocketEngine");
-const GoeConfig = require("./GoeConfig");
 
 class GOESocket {
 

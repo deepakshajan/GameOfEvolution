@@ -1,4 +1,4 @@
-const GoeConfig = require("../../../config/GoeConfig");
+
 
 class SimulationUtils {
 
@@ -25,6 +25,7 @@ class SimulationUtils {
     static getRandomLimitedPercentageValue(limit) {
       return Math.random() * limit;
     }
+
 }
 
 module.exports = SimulationUtils;

@@ -1,108 +1,92 @@
 class GoeConfig {
 
     
-    _socketPingIntervalMs = 1000;
-    _simulationStepIntervalMs = 50;
+    socketPingIntervalMs = 1000;
     
-    _noCellsHorizontal = 100;
-    _noCellsVertical = 100;
-    _cellSizePx = 15;
-    _cellColorDefault = "white";
+    noCellsHorizontal = 100;
+    noCellsVertical = 100;
+    cellSizePx = 15;
+    cellColorDefault = "white";
     
-    _probInitialLife = 1/1_000;
+    probInitialLife = 1/50;
+    tempMaxAliveCount = -1;
 
-    _geneLifeSpanMaxValue = 30;
+    geneLifeSpanMaxValue = 70;
 
-    _canRunSimulation = false;
-    _canPingClient = false;
+    canRunSimulation = false;
+    canPingClient = false;
 
-    _config;
-
-    constructor() {
-        if(!GoeConfig.instance) {
-            GoeConfig.instance = this;
-        }
-        return GoeConfig.instance;
-    }
-
-    getConfig() {
-        return GoeConfig.instance._config;
-    }
-    
-    setConfig(config) {
-        GoeConfig.instance._config = config;
-    }
 
     get canPingClient() {
-        return GoeConfig.instance._canPingClient;
+        return this.canPingClient;
     }
     set canPingClient(value) {
-     GoeConfig.instance._canPingClient = value;
+     this.canPingClient = value;
     }
     get socketPingIntervalMs() {
-        return GoeConfig.instance._socketPingIntervalMs;
+        return this.socketPingIntervalMs;
     }
     set socketPingIntervalMs(value) {
-     GoeConfig.instance._socketPingIntervalMs = value;
+     this.socketPingIntervalMs = value;
     }
     get simulationStepIntervalMs() {
-        return GoeConfig.instance._simulationStepIntervalMs;
+        return this.simulationStepIntervalMs;
     }
     set simulationStepIntervalMs(value) {
-     GoeConfig.instance._simulationStepIntervalMs = value;
+     this.simulationStepIntervalMs = value;
     }
     get noCellsHorizontal() {
-        return GoeConfig.instance._noCellsHorizontal;
+        return this.noCellsHorizontal;
     }
     set noCellsHorizontal(value) {
-     GoeConfig.instance._noCellsHorizontal = value;
+     this.noCellsHorizontal = value;
     }
     get noCellsVertical() {
-        return GoeConfig.instance._noCellsVertical;
+        return this.noCellsVertical;
     }
     set noCellsVertical(value) {
-     GoeConfig.instance._noCellsVertical = value;
+     this.noCellsVertical = value;
     }
     get cellSizePx() {
-        return GoeConfig.instance._cellSizePx;
+        return this.cellSizePx;
     }
     set cellSizePx(value) {
-     GoeConfig.instance._cellSizePx = value;
+     this.cellSizePx = value;
     }
     get cellColorDefault() {
-        return GoeConfig.instance._cellColorDefault;
+        return this.cellColorDefault;
     }
     set cellColorDefault(value) {
-     GoeConfig.instance._cellColorDefault = value;
+     this.cellColorDefault = value;
     }
     get probInitialLife() {
-        return GoeConfig.instance._probInitialLife;
+        return this.probInitialLife;
     }
     set probInitialLife(value) {
-     GoeConfig.instance._probInitialLife = value;
+     this.probInitialLife = value;
     }
     get probInitialLife() {
-        return GoeConfig.instance._probInitialLife;
+        return this.probInitialLife;
     }
     set probInitialLife(value) {
-     GoeConfig.instance._probInitialLife = value;
+     this.probInitialLife = value;
     }
     get canRunSimulation() {
-        return GoeConfig.instance._canRunSimulation;
+        return this.canRunSimulation;
     }
     set canRunSimulation(value) {
-     GoeConfig.instance._canRunSimulation = value;
+     this.canRunSimulation = value;
     }
     get geneLifeSpanMaxValue() {
-        return this._geneLifeSpanMaxValue;
+        return this.geneLifeSpanMaxValue;
     }
     set geneLifeSpanMaxValue(value) {
-        this._geneLifeSpanMaxValue = value;
+        this.geneLifeSpanMaxValue = value;
     }
 
 
 }
 
-module.exports = new GoeConfig();
+module.exports = GoeConfig;
 
     
