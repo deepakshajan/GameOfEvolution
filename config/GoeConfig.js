@@ -8,10 +8,10 @@ class GoeConfig {
     cellSizePx = 15;
     cellColorDefault = "white";
     
-    probInitialLife = 1/50;
+    probInitialLife = 1/100;
     tempMaxAliveCount = -1;
 
-    geneLifeSpanMaxValue = 70;
+    geneLifeSpanMaxValue = 99;
 
     canRunSimulation = false;
     canPingClient = false;

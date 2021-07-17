@@ -1,3 +1,6 @@
+const ConfigCache = require("../../../config/ConfigCache");
+const ModelUtils = require("./ModelUtils");
+
 class MovementUtils {
 
     static movementDirection = Object.freeze({
@@ -24,25 +27,29 @@ class MovementUtils {
     }
 
     static computeNextPosition(fullCell) {
-        const randomValue = Math.floor(Math.random() * 7);
-        const nextDirection = this.directionMap.get(randomValue);
-        if(nextDirection === this.movementDirection.NORTH) {
-            return [fullCell.rowKey-1, fullCell.colKey];
-        } else if(nextDirection === this.movementDirection.NORTHEAST) {
-            return [fullCell.rowKey-1, fullCell.colKey+1];
-        } else if(nextDirection === this.movementDirection.EAST) {
-            return [fullCell.rowKey, fullCell.colKey+1];
-        } else if(nextDirection === this.movementDirection.SOUTHEAST) {
-            return [fullCell.rowKey+1, fullCell.colKey+1];
-        } else if(nextDirection === this.movementDirection.SOUTH) {
-            return [fullCell.rowKey+1, fullCell.colKey];
-        } else if(nextDirection === this.movementDirection.SOUTHWEST) {
-            return [fullCell.rowKey+1, fullCell.colKey-1];
-        } else if(nextDirection === this.movementDirection.WEST) {
-            return [fullCell.rowKey, fullCell.colKey-1];
-        } else if(nextDirection === this.movementDirection.NORTHWEST) {
-            return [fullCell.rowKey-1, fullCell.colKey-1];
-        }
+        let returnValue;
+        do {
+            const nextDirection = this.directionMap.get(Math.floor(Math.random() * 7));
+            if(nextDirection === this.movementDirection.NORTH) {
+                returnValue = [fullCell.rowKey-1, fullCell.colKey];
+            } else if(nextDirection === this.movementDirection.NORTHEAST) {
+                returnValue =  [fullCell.rowKey-1, fullCell.colKey+1];
+            } else if(nextDirection === this.movementDirection.EAST) {
+                returnValue =  [fullCell.rowKey, fullCell.colKey+1];
+            } else if(nextDirection === this.movementDirection.SOUTHEAST) {
+                returnValue =  [fullCell.rowKey+1, fullCell.colKey+1];
+            } else if(nextDirection === this.movementDirection.SOUTH) {
+                returnValue =  [fullCell.rowKey+1, fullCell.colKey];
+            } else if(nextDirection === this.movementDirection.SOUTHWEST) {
+                returnValue =  [fullCell.rowKey+1, fullCell.colKey-1];
+            } else if(nextDirection === this.movementDirection.WEST) {
+                returnValue =  [fullCell.rowKey, fullCell.colKey-1];
+            } else if(nextDirection === this.movementDirection.NORTHWEST) {
+                returnValue =  [fullCell.rowKey-1, fullCell.colKey-1];
+            }
+        } while(!this.isPositionInRange(returnValue));
+        
+        return returnValue;
     }
 
     static moveCell(data, fullCell, refreshCell, newPosition) {
@@ -54,8 +61,13 @@ class MovementUtils {
         newFullCell.geneData = fullCell.geneData;
         newFullCell.step = fullCell.step+1; 
 
-        fullCell.reset();
-        refreshCell.reset();
+        ModelUtils.resetFullCellData(fullCell);
+        ModelUtils.resetRefreshCellData(refreshCell);
+    }
+
+    static isPositionInRange(position) {
+        const config = ConfigCache.getConfig();
+        return position[0]>=0 && position[0]<config.noCellsVertical && position[1]>=0 && position[1]<config.noCellsHorizontal;
     }
 }
 

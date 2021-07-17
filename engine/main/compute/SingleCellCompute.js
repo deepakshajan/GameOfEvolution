@@ -9,7 +9,7 @@ class SingleCellCompute {
         if(SimulationUtils.getBooleanFromInverseProbablity(fullCell.geneData.lifeSpan)) {
             this.die(data, fullCell, refreshCell);
         } else if(SimulationUtils.getBooleanFromProbablity(fullCell.geneData.movement)) {
-            // this.move(data, fullCell, refreshCell);
+            this.move(data, fullCell, refreshCell);
         } else if(SimulationUtils.getBooleanFromProbablity(fullCell.geneData.reproductivity)) {
 
         }
