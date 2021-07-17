@@ -16,6 +16,9 @@ class SimulationWorker {
             this.worker.on("error", error => {
                 console.log(error);
               });
+              this.worker.on("exit", error => {
+                console.log("GOELog: Exiting from worker thread.");
+              });
           }
     }
 

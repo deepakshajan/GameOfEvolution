@@ -9,6 +9,8 @@ class StartSimulationService {
         DataCache.resetData();
         ConfigCache.getConfig().canRunSimulation= true;
         ConfigCache.getConfig().canPingClient = true;
+        console.log("GOELog: Starting simulation.");
+        console.log("GOELog: Starting worker thread.");
         SimulationWorker.start();
         SimulationWorker.worker.postMessage({config: ConfigCache.getConfig()});
     }
