@@ -16,14 +16,14 @@ class FullCellDataModelBE {
         this.colKey = colIndex;
     }
 
-    clone() {
+    clone(_self) {
         let clone = new FullCellDataModelBE();
-        clone.rowKey = this.rowKey;
-        clone.colKey = this.colKey;
-        clone.step = this.step;
-        clone.isAlive = this.isAlive;
-        clone.isMultiCell = this.isMultiCell;
-        clone.geneData = this.geneData.clone();
+        clone.rowKey = _self.rowKey;
+        clone.colKey = _self.colKey;
+        clone.step = _self.step;
+        clone.isAlive = _self.isAlive;
+        clone.isMultiCell = _self.isMultiCell;
+        clone.geneData = _self.geneData.clone();
         return clone;
     }
 

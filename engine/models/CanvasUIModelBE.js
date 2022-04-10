@@ -6,11 +6,11 @@ class CanvasUIModelBE {
     noCellsVertical   = ConfigCache.getConfig().noCellsVertical;
     cellSizePx = ConfigCache.getConfig().cellSizePx;
 
-    clone() {
+    clone(_self) {
         let clone = new CanvasUIModelBE();
-        clone.noCellsHorizontal = this.noCellsHorizontal;
-        clone.noCellsVertical = this.noCellsVertical;
-        clone.cellSizePx = this.cellSizePx;
+        clone.noCellsHorizontal = _self.noCellsHorizontal;
+        clone.noCellsVertical = _self.noCellsVertical;
+        clone.cellSizePx = _self.cellSizePx;
         return clone;
     }
 }

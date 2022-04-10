@@ -1,4 +1,5 @@
 const ConfigCache = require("../../../config/ConfigCache");
+const CellCreationUtils = require("../util/CellCreationUtils");
 const SimulationUtils = require("../util/SimulationUtils");
 const MultiCellCompute = require("./MultiCellCompute");
 const SingleCellCompute = require("./SingleCellCompute");
@@ -15,7 +16,7 @@ class ComputeNextStepData {
             let fullCell = SimulationUtils.getFullCellData(currentData, i, j);
             if(fullCell.step === this.step-1) { //If this condition fails means that the cell was modified by action from some other cell or is already complete
               let refreshCell = SimulationUtils.getRefreshCellData(currentData, i, j);
-              fullCell.isAlive? this.computeNextActionForAliveCells(currentData,fullCell,refreshCell) : this.computeFormationOfFirstCell(currentData,fullCell,refreshCell);
+              fullCell.isAlive? this.computeNextActionForAliveCells(currentData,fullCell,refreshCell) : CellCreationUtils.computeFormationOfFirstCell(currentData,fullCell,refreshCell);
               this.postComputeOperationsOnCellLevel(fullCell);
             }
           }  
@@ -23,17 +24,6 @@ class ComputeNextStepData {
         currentData.canvasRefreshData.step = this.step;
 
         return currentData;
-    }
-
-    static computeFormationOfFirstCell(data, fullCell, refreshCell) {
-      if(SimulationUtils.getBooleanFromProbablity(ConfigCache.getConfig().probInitialLife) 
-          && (ConfigCache.getConfig().tempMaxAliveCount>data.canvasRefreshData.statsData.currentAliveCount || ConfigCache.getConfig().tempMaxAliveCount<0)) {
-        fullCell.isAlive = true;
-        this.computeGeneAttributesForCreatedCells(fullCell);
-        data.canvasRefreshData.statsData.currentAliveCount++;
-        data.canvasRefreshData.statsData.totalAliveCount++;
-        refreshCell.cellColor = "black";
-      }
     }
 
     static computeNextActionForAliveCells(data, fullCell, refreshCell) {
@@ -44,10 +34,6 @@ class ComputeNextStepData {
       fullCell.step = this.step;
     }
 
-    static computeGeneAttributesForCreatedCells(fullCell) {
-      fullCell.geneData.lifeSpan = SimulationUtils.getRandomLimitedPercentageValue(ConfigCache.getConfig().geneLifeSpanMaxValue);
-      fullCell.geneData.movement = SimulationUtils.getRandomPercentageValue();
-    }
 
 }
 

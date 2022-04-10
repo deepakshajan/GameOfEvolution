@@ -4,11 +4,11 @@ class GeneDataModelBE {
     movement = 0;
     reproductivity = 0;
 
-    clone() {
+    static clone(_self) {
         let clone = new GeneDataModelBE();
-        clone.lifeSpan = this.lifeSpan;
-        clone.movement = this.movement;
-        clone.reproductivity = this.reproductivity;
+        clone.lifeSpan = _self.lifeSpan;
+        clone.movement = _self.movement;
+        clone.reproductivity = _self.reproductivity;
         return clone;
     }
 

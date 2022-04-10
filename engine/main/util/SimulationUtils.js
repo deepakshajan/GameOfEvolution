@@ -1,5 +1,3 @@
-
-
 class SimulationUtils {
 
     static getFullCellData(data, rowIndex, colIndex) {
@@ -11,20 +9,21 @@ class SimulationUtils {
     }
 
     static getBooleanFromProbablity(probablityInPercentage) {
-        return this.getRandomPercentageValue() <= probablityInPercentage;
+        return this.getRandomPercentageValue() < probablityInPercentage;
     }
 
     static getBooleanFromInverseProbablity(probablityInPercentage) {
-      return this.getRandomPercentageValue() <= 100-probablityInPercentage;
+      return this.getRandomPercentageValue() < 100-probablityInPercentage;
   }
 
     static getRandomPercentageValue() {
-      return Math.random() * 100;
+      return Math.floor(Math.random() * 100);
     }
 
     static getRandomLimitedPercentageValue(limit) {
-      return Math.random() * limit;
+      return Math.floor(Math.random() * limit);
     }
+
 
 }
 

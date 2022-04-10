@@ -12,6 +12,19 @@ class ModelUtils {
     static resetRefreshCellData(refreshCellData) {
         refreshCellData.cellColor = ConfigCache.getConfig().cellColorDefault;
     }
+
+    static getFullCellAtPosition(data, position) {
+        return data.canvasData.fullCellData[position[0]][position[1]];
+    }
+
+    static getRefreshCellCellAtPosition(data, position) {
+        return data.canvasRefreshData.cellData[position[0]][position[1]];
+    }
+
+    static isCellAlive(data, position) {
+        return this.getFullCellAtPosition(data, position).isAlive;
+    }
+
 }
 
 module.exports = ModelUtils;

@@ -1,5 +1,6 @@
 const ConfigCache = require("../../../config/ConfigCache");
 const ModelUtils = require("./ModelUtils");
+const SimulationUtils = require("./SimulationUtils");
 
 class MovementUtils {
 
@@ -26,10 +27,10 @@ class MovementUtils {
         this.directionMap.set(this.movementDirection.NORTHWEST,this.movementDirection.NORTHWEST);
     }
 
-    static computeNextPosition(fullCell) {
+    static computeAdjacentPosition(fullCell) {
         let returnValue;
         do {
-            const nextDirection = this.directionMap.get(Math.floor(Math.random() * 7));
+            const nextDirection = this.directionMap.get(SimulationUtils.getRandomLimitedPercentageValue(8));
             if(nextDirection === this.movementDirection.NORTH) {
                 returnValue = [fullCell.rowKey-1, fullCell.colKey];
             } else if(nextDirection === this.movementDirection.NORTHEAST) {
@@ -53,8 +54,8 @@ class MovementUtils {
     }
 
     static moveCell(data, fullCell, refreshCell, newPosition) {
-        const newFullCell = data.canvasData.fullCellData[newPosition[0]][newPosition[1]];
-        const newRefreshCell = data.canvasRefreshData.cellData[newPosition[0]][newPosition[1]];
+        const newFullCell = ModelUtils.getFullCellAtPosition(data, newPosition);
+        const newRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, newPosition);
 
         newRefreshCell.cellColor = refreshCell.cellColor;
         newFullCell.isAlive = true;
@@ -63,6 +64,10 @@ class MovementUtils {
 
         ModelUtils.resetFullCellData(fullCell);
         ModelUtils.resetRefreshCellData(refreshCell);
+    }
+
+    static handleMovementCollision() {
+        //TODO-dshajan case where new positin to be moved to is already occupied by another alive cell
     }
 
     static isPositionInRange(position) {

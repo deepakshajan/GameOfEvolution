@@ -19,15 +19,15 @@ class CanvasRefreshDataModelBE {
         }
     }
 
-    clone() {
+    clone(_self) {
         let clone = new CanvasRefreshDataModelBE();
-        clone.step = this.step;
+        clone.step = _self.step;
         for(let i=0;i<ConfigCache.getConfig().noCellsVertical;i++) {
             for(let j=0;j<ConfigCache.getConfig().noCellsHorizontal;j++) {
-                clone.cellData[i][j] = this.cellData[i][j].clone();
+                clone.cellData[i][j] = _self.cellData[i][j].clone();
             }
         }
-        clone.statsData = this.statsData.clone();
+        clone.statsData = _self.statsData.clone();
         return clone;   
     }
 }

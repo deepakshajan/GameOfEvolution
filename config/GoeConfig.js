@@ -1,17 +1,19 @@
 class GoeConfig {
 
     
-    socketPingIntervalMs = 1000;
+    socketPingIntervalMs = 500;
     
     noCellsHorizontal = 100;
-    noCellsVertical = 100;
+    noCellsVertical = 55;
     cellSizePx = 15;
     cellColorDefault = "white";
     
-    probInitialLife = 1/100;
-    tempMaxAliveCount = -1;
+    probInitialLife = 1/10_000;
+    tempMaxAliveCount = 1;
 
-    geneLifeSpanMaxValue = 99;
+    geneLifeSpanMaxValue = 75;
+    geneMovementMaxValue = 75;
+    geneReproductivityMaxValue = 75;
 
     canRunSimulation = false;
     canPingClient = false;
@@ -83,7 +85,18 @@ class GoeConfig {
     set geneLifeSpanMaxValue(value) {
         this.geneLifeSpanMaxValue = value;
     }
-
+    get geneReproductivityMaxValue() {
+        return this.geneReproductivityMaxValue;
+    }
+    set geneReproductivityMaxValue(value) {
+        this.geneReproductivityMaxValue = value;
+    }
+    get geneMovementMaxValue() {
+        return this.geneMovementMaxValue;
+    }
+    set geneMovementMaxValue(value) {
+        this.geneMovementMaxValue = value;
+    }
 
 }
 

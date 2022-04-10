@@ -15,11 +15,11 @@ class CanvasDataModelBE {
         }
     }
 
-    clone() {
+    clone(_self) {
         let clone = new CanvasDataModelBE();
         for(let i=0;i<ConfigCache.getConfig().noCellsVertical;i++) {
             for(let j=0;j<ConfigCache.getConfig().noCellsHorizontal;j++) {
-                clone.fullCellData[i][j] = this.fullCellData[i][j].clone();
+                clone.fullCellData[i][j] = _self.fullCellData[i][j].clone();
             }
         }
         return clone;

@@ -8,11 +8,11 @@ class LandingPageModelBE {
     canvasData = new CanvasDataModelBE();
     canvasRefreshData = new CanvasRefreshDataModelBE();
 
-    clone() {
+    clone(_self) {
         let clone = new LandingPageModelBE();
-        clone.canvasUI = this.canvasUI.clone();
-        clone.canvasData = this.canvasData.clone();
-        clone.canvasRefreshData = this.canvasRefreshData.clone();
+        clone.canvasUI = _self.canvasUI.clone();
+        clone.canvasData = _self.canvasData.clone();
+        clone.canvasRefreshData = _self.canvasRefreshData.clone();
         return clone;
     }
 }

@@ -11,11 +11,11 @@ class RefreshCellDataModelBE {
         this.colKey = columnKey;
     }
 
-    clone() {
+    clone(_self) {
         let clone = new RefreshCellDataModelBE();
-        clone.rowKey = this.rowKey;
-        clone.colKey = this.colKey;
-        clone.cellColor = this.cellColor;
+        clone.rowKey = _self.rowKey;
+        clone.colKey = _self.colKey;
+        clone.cellColor = _self.cellColor;
         return clone;
     }
 
