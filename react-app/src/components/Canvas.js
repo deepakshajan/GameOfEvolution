@@ -1,12 +1,14 @@
 import { FixedSizeGrid as Grid, areEqual } from 'react-window';
 import React, { Fragment, memo } from "react";
+import CellCard from './CellCard';
+import axios from 'axios';
 const { PureComponent } = require("react");
 
 class Canvas extends PureComponent {
 
     cells =[];
     cell = memo(({ data, columnIndex, rowIndex, style }) => (
-        <div style={{...style,backgroundColor: data[rowIndex][columnIndex].cellColor}} className="canvas-cell"></div>
+        <div style={{...style,backgroundColor: data[rowIndex][columnIndex].cellColor}} className="canvas-cell" onClick={this.handleCellClick.bind(this, rowIndex, columnIndex)}></div>
     ),areEqual);
     viewPortSize = this.getViewportSize();
 
@@ -14,12 +16,16 @@ class Canvas extends PureComponent {
     constructor(props) {
         super(props);
         this.itemsAray = props.refreshData.cellData;
+        this.state = {cellCardDisplayed: false, cellData: {}};
+
+        this.handleCellClick = this.handleCellClick.bind(this);
+        this.closeCellCard = this.closeCellCard.bind(this);
     }
 
     render() {
         return (
             <Fragment>
-                <div className="canvas-container">
+                <div className="canvas-container" onClick={this.closeCellCard}>
                     <div className="canvas-inner-container">
                         <Grid
                             itemData = {this.props.refreshData.cellData}
@@ -33,8 +39,35 @@ class Canvas extends PureComponent {
                         </Grid>
                     </div>
                 </div>
+                {this.state.cellCardDisplayed ? <CellCard cellData={this.state.cellData}></CellCard> : null}
             </Fragment>
+            
         );
+    }
+
+    handleCellClick(rowIndex, columnIndex) {
+        if(!this.state.cellCardDisplayed) {
+            this.fetchCellDataFromServer(rowIndex, columnIndex);
+        } else {
+            this.closeCellCard();
+        }
+    }
+
+    closeCellCard() {
+        let newState = {...this.state};
+        if(this.state.cellCardDisplayed) {
+            newState.cellCardDisplayed = false;
+        }
+        this.setState(newState);
+    }
+
+    fetchCellDataFromServer(rowIndex, columnIndex) {
+        axios.get ('http://localhost:8082/cellData', {params:{rowno: rowIndex, colno:columnIndex}}).then(res => {
+            let newState = {...this.state};
+            newState.cellCardDisplayed = true;
+            newState.cellData = res.data;
+            this.setState(newState);
+        });
     }
 
     getViewportSize(){

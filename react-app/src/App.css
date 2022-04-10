@@ -67,3 +67,23 @@
   margin: 2px 2px 2px 2px;
 }
 
+.cell-card {
+  z-index: 100;
+  position: fixed;
+  width: 500px;
+  min-height: 500px;
+  top: 250px;
+  left: 250px;
+  border: double;
+  background-color: grey;
+}
+
+.cell-card-row {
+  display: block;
+  left: 20px;
+  top: 20px;
+  font-size: large;
+  font-weight: bold;
+  position: relative;
+}
+
