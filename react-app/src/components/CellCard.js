@@ -6,8 +6,9 @@ class CellCard extends Component {
 
     render() {
         return (
-            <div className="cell-card">
+            <div className="cell-card" style={{backgroundColor:this.props.cellData.speciesId !==0 ? this.props.cellData.speciesId : 'white'}}>
                 <span className="cell-card-row">Position : [ {this.props.cellData.rowKey} , {this.props.cellData.colKey} ]</span>
+                <span className="cell-card-row">Species : {this.props.cellData.speciesId}</span>
                 <span className="cell-card-row">Alive : {this.props.cellData.isAlive ? 'Yes': 'No'}</span>
                 <span className="cell-card-row">Multicell : {this.props.cellData.isMultiCell ? 'Yes' : 'No'}</span>
                 <span className="cell-card-row">Lifespan : {this.props.cellData.geneData.lifeSpan}</span>

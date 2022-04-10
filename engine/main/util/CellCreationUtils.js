@@ -1,4 +1,5 @@
 const ConfigCache = require("../../../config/ConfigCache");
+const SpeciesCache = require("../../data/SpeciesCache");
 const GeneDataModelBE = require("../../models/GeneDataModelBE");
 const ModelUtils = require("./ModelUtils");
 const SimulationUtils = require("./SimulationUtils");
@@ -29,10 +30,12 @@ class CellCreationUtils {
         if(!ModelUtils.isCellAlive(data, position)) {
             newRefreshCell.cellColor = refreshCell.cellColor;
             newFullCell.isAlive = true;
+            newFullCell.speciesId = fullCell.speciesId;
             newFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
             newFullCell.step = fullCell.step+1; 
             data.canvasRefreshData.statsData.currentAliveCount++;
             data.canvasRefreshData.statsData.totalAliveCount++;
+            SpeciesCache.addCount(newFullCell.speciesId);
         } else {
             this.handleCreationCollision();
         }
@@ -44,7 +47,9 @@ class CellCreationUtils {
           this.computeGeneAttributesForCreatedCells(fullCell);
           data.canvasRefreshData.statsData.currentAliveCount++;
           data.canvasRefreshData.statsData.totalAliveCount++;
-          refreshCell.cellColor = "black";
+          let speciesId = this.generateNewSpeciesId();
+          fullCell.speciesId = speciesId;
+          refreshCell.cellColor = speciesId;
     }
 
     static handleCreationCollision() {
@@ -57,6 +62,26 @@ class CellCreationUtils {
         fullCell.geneData.movement = SimulationUtils.getRandomLimitedPercentageValue(ConfigCache.getConfig().geneMovementMaxValue);
         fullCell.geneData.reproductivity = SimulationUtils.getRandomLimitedPercentageValue(ConfigCache.getConfig().geneReproductivityMaxValue);
     }
+
+    static generateNewSpeciesId() {
+        let hexValue = this.getRandomHexValue();
+        if(SpeciesCache.contains(hexValue)) {
+            return this.generateNewSpeciesId();
+        } else {
+            SpeciesCache.addCount(hexValue);
+            return hexValue;
+        }
+    }
+
+    static getRandomHexValue() {
+        const letters = '0123456789ABCDEF';
+        let value = '#';
+        for (let i=0; i<6; i++) {
+            value += letters[Math.floor(Math.random() * 16)];
+        }
+        return value;
+      }
+
 }
 
 module.exports = CellCreationUtils;

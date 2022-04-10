@@ -8,6 +8,8 @@ class FullCellDataModelBE {
     step = 0;
     isAlive = false;
     isMultiCell = false;
+
+    speciesId = 0;
     
     geneData = new GeneDataModelBE();
 
@@ -23,6 +25,7 @@ class FullCellDataModelBE {
         clone.step = _self.step;
         clone.isAlive = _self.isAlive;
         clone.isMultiCell = _self.isMultiCell;
+        clone.speciesId = _self.speciesId;
         clone.geneData = _self.geneData.clone();
         return clone;
     }
@@ -62,6 +65,12 @@ class FullCellDataModelBE {
     }
     set isMultiCell(value) {
         this.isMultiCell = value;
+    }
+    get speciesId() {
+        return this.speciesId;
+    }
+    set speciesId(value) {
+        this.speciesId = value;
     }
 
 }

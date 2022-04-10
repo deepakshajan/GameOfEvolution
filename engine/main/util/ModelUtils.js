@@ -7,6 +7,7 @@ class ModelUtils {
     static resetFullCellData(fullCellData) {
         fullCellData.isAlive = false;
         fullCellData.isMultiCell = false;
+        fullCellData.speciesId = 0;
         fullCellData.geneData = new GeneDataModelBE();
     }
 

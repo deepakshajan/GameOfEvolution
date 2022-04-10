@@ -1,4 +1,5 @@
 const { disposeEmitNodes } = require("typescript");
+const SpeciesCache = require("../../data/SpeciesCache");
 const CellCreationUtils = require("../util/CellCreationUtils");
 const ModelUtils = require("../util/ModelUtils");
 const MovementUtils = require("../util/MovementUtils");
@@ -17,6 +18,7 @@ class SingleCellCompute {
     }
 
     static die(data, fullCell, refreshCell) {
+        SpeciesCache.removeCount(fullCell.speciesId);
         ModelUtils.resetFullCellData(fullCell);
         ModelUtils.resetRefreshCellData(refreshCell);
         data.canvasRefreshData.statsData.currentAliveCount--;

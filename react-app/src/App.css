@@ -75,7 +75,7 @@
   top: 250px;
   left: 250px;
   border: double;
-  background-color: grey;
+  border-width: thick;
 }
 
 .cell-card-row {

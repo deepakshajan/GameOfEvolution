@@ -1,4 +1,5 @@
 const ConfigCache = require("../../../config/ConfigCache");
+const GeneDataModelBE = require("../../models/GeneDataModelBE");
 const ModelUtils = require("./ModelUtils");
 const SimulationUtils = require("./SimulationUtils");
 
@@ -59,7 +60,8 @@ class MovementUtils {
 
         newRefreshCell.cellColor = refreshCell.cellColor;
         newFullCell.isAlive = true;
-        newFullCell.geneData = fullCell.geneData;
+        newFullCell.speciesId = fullCell.speciesId;
+        newFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
         newFullCell.step = fullCell.step+1; 
 
         ModelUtils.resetFullCellData(fullCell);
