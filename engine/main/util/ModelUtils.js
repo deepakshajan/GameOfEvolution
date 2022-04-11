@@ -16,14 +16,14 @@ class ModelUtils {
     }
 
     static getFullCellAtPosition(data, position) {
-        if(data === null) {
+        if(!data) {
             return DataCache.getData().canvasData.fullCellData[position[0]][position[1]];
         }
         return data.canvasData.fullCellData[position[0]][position[1]];
     }
 
     static getRefreshCellCellAtPosition(data, position) {
-        if(data === null) {
+        if(!data) {
             return DataCache.getData().canvasRefreshData.cellData[position[0]][position[1]]; 
         }
         return data.canvasRefreshData.cellData[position[0]][position[1]];

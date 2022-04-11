@@ -14,6 +14,7 @@ class CellCard extends Component {
                 <span className="cell-card-row">Lifespan : {this.props.cellData.geneData.lifeSpan}</span>
                 <span className="cell-card-row">Movement : {this.props.cellData.geneData.movement}</span>
                 <span className="cell-card-row">Reproductivity : {this.props.cellData.geneData.reproductivity}</span>
+                <span className="cell-card-row">Fitness : {this.props.cellData.geneData.fitness}</span>
             </div>
         );
       }

@@ -54,6 +54,16 @@ class MovementUtils {
         return returnValue;
     }
 
+    static move(data, fullCell, refreshCell) {
+        const newPosition = this.computeAdjacentPosition(fullCell);
+        if(!ModelUtils.isCellAlive(data, newPosition)) {
+            this.moveCell(data, fullCell, refreshCell, newPosition);
+        } else {
+            this.handleCollision(data, fullCell, refreshCell, newPosition);
+        } 
+
+    }
+
     static moveCell(data, fullCell, refreshCell, newPosition) {
         const newFullCell = ModelUtils.getFullCellAtPosition(data, newPosition);
         const newRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, newPosition);
@@ -68,8 +78,18 @@ class MovementUtils {
         ModelUtils.resetRefreshCellData(refreshCell);
     }
 
-    static handleMovementCollision() {
-        //TODO-dshajan case where new positin to be moved to is already occupied by another alive cell
+    static handleCollision(data, fullCell, refreshCell, newPosition) {
+        const newFullCell = ModelUtils.getFullCellAtPosition(data, newPosition);
+        if(newFullCell.geneData.fitness > fullCell.geneData.fitness) {
+            const newRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, newPosition);
+            newRefreshCell.cellColor = refreshCell.cellColor;
+            newFullCell.speciesId = fullCell.speciesId;
+            newFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
+            newFullCell.step = fullCell.step+1; 
+
+            ModelUtils.resetFullCellData(fullCell);
+            ModelUtils.resetRefreshCellData(refreshCell);
+        }
     }
 
     static isPositionInRange(position) {
