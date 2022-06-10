@@ -1,13 +1,19 @@
 const SpeciesCache = require("../../data/SpeciesCache");
 const GeneDataModelBE = require("../../models/GeneDataModelBE");
+const EvolutionUtils = require("./EvolutionUtils");
 const ModelUtils = require("./ModelUtils");
 const MovementUtils = require("./MovementUtils");
+const ProbabilityUtils = require("./ProbabilityUtils");
 
 class ReproductionUtils {
 
     static reproduce(data, fullCell, refreshCell) {
         const newPosition = MovementUtils.computeAdjacentPosition(fullCell);
-        this.createChildCellAtPosition(data, fullCell, refreshCell, newPosition);
+        if(ProbabilityUtils.getBooleanForEvolutionByChance()) {
+            EvolutionUtils.evolveChildCellAtPosition(data, fullCell, refreshCell, newPosition);
+        } else {
+            this.createChildCellAtPosition(data, fullCell, refreshCell, newPosition);
+        }
     }
 
     static createChildCellAtPosition(data, fullCell, refreshCell, position) {
@@ -28,15 +34,15 @@ class ReproductionUtils {
     }
 
     static handleCollision(data, fullCell, refreshCell, position) {
-        const newFullCell = ModelUtils.getFullCellAtPosition(data, position);
-        if(newFullCell.geneData.fitness > fullCell.geneData.fitness) {
-            let newRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, position);
-            newRefreshCell.cellColor = refreshCell.cellColor;
-            newFullCell.speciesId = fullCell.speciesId;
-            newFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
-            newFullCell.step = fullCell.step+1; 
+        const existingFullCell = ModelUtils.getFullCellAtPosition(data, position);
+        if(existingFullCell.geneData.fitness < fullCell.geneData.fitness) {
+            let existingRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, position);
+            existingRefreshCell.cellColor = refreshCell.cellColor;
+            existingFullCell.speciesId = fullCell.speciesId;
+            existingFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
+            existingFullCell.step = fullCell.step+1; 
             SpeciesCache.removeCount(fullCell.speciesId);
-            SpeciesCache.addCount(newFullCell.speciesId);
+            SpeciesCache.addCount(existingFullCell.speciesId);
         }
     }
 

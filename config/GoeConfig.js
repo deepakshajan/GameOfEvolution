@@ -1,5 +1,4 @@
 class GoeConfig {
-
     
     socketPingIntervalMs = 500;
     
@@ -8,13 +7,17 @@ class GoeConfig {
     cellSizePx = 12;
     cellColorDefault = "white";
     
-    probInitialLife = 1/10_000;
-    tempMaxAliveCount = -1;
+    probInitialLife = 1/100000;
+    probEvolution = 1 / 10000;
+    tempMaxAliveCount = 1;
+    minEvolutionDelta = 1;
+    maxEvolutionDelta = 5;
 
-    geneLifeSpanMaxValue = 10;
-    geneMovementMaxValue = 33;
+    geneCommonMinValue = 1;
+    geneLifeSpanMaxValue = 50;
+    geneMovementMaxValue = 6;
     geneReproductivityMaxValue = 50;
-    genefitnessStartMaxValue = 100;
+    genefitnessStartMaxValue = this.geneCommonMinValue+1;
 
     canRunSimulation = false;
     canPingClient = false;
@@ -80,6 +83,24 @@ class GoeConfig {
     set canRunSimulation(value) {
      this.canRunSimulation = value;
     }
+    get minEvolutionDelta() {
+        return this.minEvolutionDelta;
+    }
+    set minEvolutionDelta(value) {
+        this.minEvolutionDelta = value;
+    }
+    get maxEvolutionDelta() {
+        return this.maxEvolutionDelta;
+    }
+    set maxEvolutionDelta(value) {
+        this.maxEvolutionDelta = value;
+    }
+    get geneCommonMinValue() {
+        return this.geneCommonMinValue;
+    }
+    set geneCommonMinValue(value) {
+        this.geneCommonMinValue = value;
+    }
     get geneLifeSpanMaxValue() {
         return this.geneLifeSpanMaxValue;
     }
@@ -104,6 +125,13 @@ class GoeConfig {
     set genefitnessStartMaxValue(value) {
         this.genefitnessStartMaxValue = value;
     }
+    get probEvolution() {
+        return this.probEvolution;
+    }
+    set probEvolution(value) {
+        this.probEvolution = value;
+    }
+
 
 }
 

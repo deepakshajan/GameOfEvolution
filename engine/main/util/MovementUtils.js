@@ -1,7 +1,7 @@
 const ConfigCache = require("../../../config/ConfigCache");
 const GeneDataModelBE = require("../../models/GeneDataModelBE");
 const ModelUtils = require("./ModelUtils");
-const SimulationUtils = require("./SimulationUtils");
+const ProbabilityUtils = require("./ProbabilityUtils");
 
 class MovementUtils {
 
@@ -31,7 +31,7 @@ class MovementUtils {
     static computeAdjacentPosition(fullCell) {
         let returnValue;
         do {
-            const nextDirection = this.directionMap.get(SimulationUtils.getRandomLimitedPercentageValue(8));
+            const nextDirection = this.directionMap.get(ProbabilityUtils.getRandomValueWithin(8));
             if(nextDirection === this.movementDirection.NORTH) {
                 returnValue = [fullCell.rowKey-1, fullCell.colKey];
             } else if(nextDirection === this.movementDirection.NORTHEAST) {
@@ -79,13 +79,13 @@ class MovementUtils {
     }
 
     static handleCollision(data, fullCell, refreshCell, newPosition) {
-        const newFullCell = ModelUtils.getFullCellAtPosition(data, newPosition);
-        if(newFullCell.geneData.fitness > fullCell.geneData.fitness) {
-            const newRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, newPosition);
-            newRefreshCell.cellColor = refreshCell.cellColor;
-            newFullCell.speciesId = fullCell.speciesId;
-            newFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
-            newFullCell.step = fullCell.step+1; 
+        const existingCell = ModelUtils.getFullCellAtPosition(data, newPosition);
+        if(existingCell.geneData.fitness < fullCell.geneData.fitness) {
+            const existingRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, newPosition);
+            existingRefreshCell.cellColor = refreshCell.cellColor;
+            existingCell.speciesId = fullCell.speciesId;
+            existingCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
+            existingCell.step = fullCell.step+1; 
 
             ModelUtils.resetFullCellData(fullCell);
             ModelUtils.resetRefreshCellData(refreshCell);
