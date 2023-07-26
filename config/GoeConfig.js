@@ -2,12 +2,12 @@ class GoeConfig {
     
     socketPingIntervalMs = 500;
     
-    noCellsHorizontal = 100;
-    noCellsVertical = 50;
+    noCellsHorizontal = 200;
+    noCellsVertical = 200;
     cellSizePx = 12;
     cellColorDefault = "white";
     
-    probInitialLife = 1/100000;
+    probInitialLife = 1/10000;
     probEvolution = 1 / 10000;
     tempMaxAliveCount = 1;
     minEvolutionDelta = 1;
@@ -19,8 +19,8 @@ class GoeConfig {
     geneReproductivityMaxValue = 50;
     genefitnessStartMaxValue = this.geneCommonMinValue+1;
 
-    canRunSimulation = false;
-    canPingClient = false;
+    canRunSimulation = true;
+    canPingClient = true;
 
 
     get canPingClient() {

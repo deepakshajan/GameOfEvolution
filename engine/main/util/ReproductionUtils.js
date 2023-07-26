@@ -36,13 +36,13 @@ class ReproductionUtils {
     static handleCollision(data, fullCell, refreshCell, position) {
         const existingFullCell = ModelUtils.getFullCellAtPosition(data, position);
         if(existingFullCell.geneData.fitness < fullCell.geneData.fitness) {
+            SpeciesCache.removeCount(existingFullCell.speciesId);
             let existingRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, position);
             existingRefreshCell.cellColor = refreshCell.cellColor;
             existingFullCell.speciesId = fullCell.speciesId;
             existingFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
             existingFullCell.step = fullCell.step+1; 
-            SpeciesCache.removeCount(fullCell.speciesId);
-            SpeciesCache.addCount(existingFullCell.speciesId);
+            SpeciesCache.addCount(fullCell.speciesId);
         }
     }
 

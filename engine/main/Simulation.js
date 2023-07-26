@@ -1,6 +1,7 @@
 const ComputeNextStepData = require("./compute/ComputeNextStepData");
 const { isMainThread, parentPort, workerData } = require('worker_threads');
 const ConfigCache = require("../../config/ConfigCache");
+const SpeciesCache = require("../data/SpeciesCache");
 
 class Simulation {
 
@@ -20,6 +21,7 @@ class Simulation {
         const nextCurrentAliveCount = nextData.canvasRefreshData.statsData.currentAliveCount;
         const currentCurrentAliveCount = currentData.canvasRefreshData.statsData.currentAliveCount;
         nextData.canvasRefreshData.statsData.evolutionCycleCount += (nextCurrentAliveCount===1 && currentCurrentAliveCount==0) ? 1 : 0;
+        nextData.canvasRefreshData.statsData.speciesAliveCount = SpeciesCache.getTotalSpeciesCount();
     }
 }
 

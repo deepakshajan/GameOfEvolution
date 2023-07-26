@@ -24,6 +24,12 @@ class SpeciesCache {
         }
     }
 
+    static getTotalSpeciesCount() {
+        let speciesCount = 0;
+        SpeciesCache.data.forEach((v,k)=>{speciesCount+=v>0?1:0});
+        return speciesCount;
+    }
+
     static resetData() {
         SpeciesCache.data = new Map();
     }

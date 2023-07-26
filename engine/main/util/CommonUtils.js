@@ -3,9 +3,9 @@ const SpeciesCache = require("../../data/SpeciesCache");
 class CommonUtils {
 
     static generateNewSpeciesId() {
-        let hexValue = this.getRandomHexValue();
+        let hexValue = CommonUtils.getRandomHexValue();
         if(SpeciesCache.contains(hexValue)) {
-            return this.generateNewSpeciesId();
+            return CommonUtils.generateNewSpeciesId();
         } else {
             SpeciesCache.addCount(hexValue);
             return hexValue;

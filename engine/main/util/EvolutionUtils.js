@@ -17,7 +17,6 @@ class EvolutionUtils {
             newFullCell.step = fullCell.step+1; 
             data.canvasRefreshData.statsData.currentAliveCount++;
             data.canvasRefreshData.statsData.totalAliveCount++;
-            SpeciesCache.addCount(newFullCell.speciesId);
         } else {
             this.handleCollision(data, fullCell, refreshCell, position);
         }  
@@ -25,14 +24,14 @@ class EvolutionUtils {
 
     static handleCollision(data, fullCell, refreshCell, position) {
         const newFullCell = ModelUtils.getFullCellAtPosition(data, position);
-        if(newFullCell.geneData.fitness > fullCell.geneData.fitness) {
+        if(newFullCell.geneData.fitness < fullCell.geneData.fitness) {
+            SpeciesCache.removeCount(newFullCell.speciesId);
             let newRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, position);
             newRefreshCell.cellColor = refreshCell.cellColor;
             newFullCell.speciesId = fullCell.speciesId;
             newFullCell.geneData = GeneDataModelBE.clone(fullCell.geneData);
             newFullCell.step = fullCell.step+1; 
-            SpeciesCache.removeCount(fullCell.speciesId);
-            SpeciesCache.addCount(newFullCell.speciesId);
+            SpeciesCache.addCount(fullCell.speciesId);
         }
     }
 

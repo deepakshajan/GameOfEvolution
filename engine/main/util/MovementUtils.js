@@ -1,4 +1,5 @@
 const ConfigCache = require("../../../config/ConfigCache");
+const SpeciesCache = require("../../data/SpeciesCache");
 const GeneDataModelBE = require("../../models/GeneDataModelBE");
 const ModelUtils = require("./ModelUtils");
 const ProbabilityUtils = require("./ProbabilityUtils");
@@ -81,6 +82,7 @@ class MovementUtils {
     static handleCollision(data, fullCell, refreshCell, newPosition) {
         const existingCell = ModelUtils.getFullCellAtPosition(data, newPosition);
         if(existingCell.geneData.fitness < fullCell.geneData.fitness) {
+            SpeciesCache.removeCount(existingCell.speciesId);
             const existingRefreshCell = ModelUtils.getRefreshCellCellAtPosition(data, newPosition);
             existingRefreshCell.cellColor = refreshCell.cellColor;
             existingCell.speciesId = fullCell.speciesId;
